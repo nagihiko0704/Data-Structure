@@ -1,15 +1,15 @@
 /*
-½ÃÀÛÁ¡À» ±âÁØÀ¸·Î ¿ì¼± »óÇÏÁÂ¿ì·Î Å½»öÇÏ¿© 0À» 1·Î ¹Ù²Û µÚ, 
-½ÃÀÛÁ¡ÀÇ ´ë°¢¼± ¹æÇâÀ¸·Î Å½»öÇÕ´Ï´Ù.
-±× ÈÄ °¢ ´ë°¢¼±À» ±âÁØÀ¸·Î »óÇÏÁÂ¿ì¸¦ Å½»öÇÏ¿© 0À» 1·Î ¹Ù²ß´Ï´Ù.
-Å½»öÀ» ÇÏ´Ù ³¡À» ¸¸³ª¸é Á¾·áÇÕ´Ï´Ù.
+ì‹œì‘ì ì„ ê¸°ì¤€ìœ¼ë¡œ ìš°ì„  ìƒí•˜ì¢Œìš°ë¡œ íƒìƒ‰í•˜ì—¬ 0ì„ 1ë¡œ ë°”ê¾¼ ë’¤, 
+ì‹œì‘ì ì˜ ëŒ€ê°ì„  ë°©í–¥ìœ¼ë¡œ íƒìƒ‰í•©ë‹ˆë‹¤.
+ê·¸ í›„ ê° ëŒ€ê°ì„ ì„ ê¸°ì¤€ìœ¼ë¡œ ìƒí•˜ì¢Œìš°ë¥¼ íƒìƒ‰í•˜ì—¬ 0ì„ 1ë¡œ ë°”ê¿‰ë‹ˆë‹¤.
+íƒìƒ‰ì„ í•˜ë‹¤ ëì„ ë§Œë‚˜ë©´ ì¢…ë£Œí•©ë‹ˆë‹¤.
 */
 #include <stdio.h>
 
 
 /*
-ÁÂ»ó == 0, ÁÂÇÏ == 1, ¿ì»ó == 2, ¿ìÇÏ == 3
-À§ == 4, ¿ŞÂÊ == 5, ¾Æ·¡ == 6, ¿À¸¥ÂÊ == 7
+ì¢Œìƒ == 0, ì¢Œí•˜ == 1, ìš°ìƒ == 2, ìš°í•˜ == 3
+ìœ„ == 4, ì™¼ìª½ == 5, ì•„ë˜ == 6, ì˜¤ë¥¸ìª½ == 7
 */
 enum {
     LFUP, LFDN, RTUP, RTDN,
@@ -17,26 +17,26 @@ enum {
 };
 
 /*
-¹è¿­ÀÇ Á¤º¸°¡ ´ã±ä ±¸Á¶Ã¼
+ë°°ì—´ì˜ ì •ë³´ê°€ ë‹´ê¸´ êµ¬ì¡°ì²´
 */
 struct Arr {
-    int num[11][10];//NULLÀ» °í·ÁÇÏ¿© ¼±¾ğ
-    int end_row;    //ÇàÀÇ ³¡
-    int end_col;    //¿­ÀÇ ³¡
+    int num[11][10];//NULLì„ ê³ ë ¤í•˜ì—¬ ì„ ì–¸
+    int end_row;    //í–‰ì˜ ë
+    int end_col;    //ì—´ì˜ ë
 };
 
 /*
-»óÇÏÁÂ¿ì¸¦ Å½»öÇÏ¿© 1À» Ã¤¿ò
+ìƒí•˜ì¢Œìš°ë¥¼ íƒìƒ‰í•˜ì—¬ 1ì„ ì±„ì›€
 */
 void full_one(struct Arr *arr, int row, int column, int direction) {
-    //Å½»öÁßÀÎ ÇàÀÌ³ª ¿­ÀÌ ³¡À» ³ÑÀ¸¸é Á¤Áö
+    //íƒìƒ‰ì¤‘ì¸ í–‰ì´ë‚˜ ì—´ì´ ëì„ ë„˜ìœ¼ë©´ ì •ì§€
     if (row < 0 || arr->end_row <= row || column < 0 || arr->end_col <= column) return;
-    //ÇØ´ç Ä­ÀÌ 0ÀÌ¸é 1À» ´ëÀÔ
+    //í•´ë‹¹ ì¹¸ì´ 0ì´ë©´ 1ì„ ëŒ€ì…
     if (arr->num[row][column] == 0) arr->num[row][column] = 1;
-    //Å½»öÁßÀÎ ÇàÀÌ³ª ¿­ µÑ Áß ÇÏ³ª°¡ ³¡¿¡ µµ´ŞÇÏ¸é Á¤Áö
+    //íƒìƒ‰ì¤‘ì¸ í–‰ì´ë‚˜ ì—´ ë‘˜ ì¤‘ í•˜ë‚˜ê°€ ëì— ë„ë‹¬í•˜ë©´ ì •ì§€
     if (row == 0 || column == 0 || row == (arr->end_row) - 1 || column == (arr->end_col) - 1) return;
 
-    //³ª¾Æ°¡´Â ¹æÇâÀ¸·Î °è¼Ó Å½»ö
+    //ë‚˜ì•„ê°€ëŠ” ë°©í–¥ìœ¼ë¡œ ê³„ì† íƒìƒ‰
     switch (direction) {
     case UP:
         full_one(arr, row - 1, column, UP);	
@@ -51,7 +51,7 @@ void full_one(struct Arr *arr, int row, int column, int direction) {
         full_one(arr, row, column + 1, RIGHT);
         break;
 
-    //¸Ç Ã³À½ ½ÃÀÛÁ¡À» ±âÁØÀ¸·Î »óÇÏÁÂ¿ì Å½»ö
+    //ë§¨ ì²˜ìŒ ì‹œì‘ì ì„ ê¸°ì¤€ìœ¼ë¡œ ìƒí•˜ì¢Œìš° íƒìƒ‰
     case -1:
         full_one(arr, row - 1, column, UP);
         full_one(arr, row, column - 1, LEFT);
@@ -61,15 +61,15 @@ void full_one(struct Arr *arr, int row, int column, int direction) {
 }
 
 /*
-´ë°¢¼±À¸·Î ¹æÇâÀ» ÁöÁ¤
+ëŒ€ê°ì„ ìœ¼ë¡œ ë°©í–¥ì„ ì§€ì •
 */
 void find_dir(struct Arr *arr, int row, int column, int direction) {
-    //Å½»öÁßÀÎ ÇàÀÌ³ª ¿­ÀÌ ³¡À» ³ÑÀ¸¸é Á¤Áö
+    //íƒìƒ‰ì¤‘ì¸ í–‰ì´ë‚˜ ì—´ì´ ëì„ ë„˜ìœ¼ë©´ ì •ì§€
     if (row < 0 || arr->end_row <= row || column < 0 || arr->end_col <= column) return;
-    //ÇØ´ç Ä­ÀÌ 0ÀÌ¸é 1À» ´ëÀÔ
+    //í•´ë‹¹ ì¹¸ì´ 0ì´ë©´ 1ì„ ëŒ€ì…
     if (arr->num[row][column] == 0) arr->num[row][column] = 1;
 
-    //°¢ ´ë°¢¼±¿¡ ¸Â´Â »óÇÏÁÂ¿ì ¹æÇâÀ» Å½»ö
+    //ê° ëŒ€ê°ì„ ì— ë§ëŠ” ìƒí•˜ì¢Œìš° ë°©í–¥ì„ íƒìƒ‰
     switch (direction) {
 	case LFUP:										
         full_one(arr, row - 1, column, UP);
@@ -89,10 +89,10 @@ void find_dir(struct Arr *arr, int row, int column, int direction) {
         break;
     }
 
-    //Å½»öÁßÀÎ ÇàÀÌ³ª ¿­ µÑ Áß ÇÏ³ª°¡ ³¡¿¡ µµ´ŞÇÏ¸é Á¤Áö
+    //íƒìƒ‰ì¤‘ì¸ í–‰ì´ë‚˜ ì—´ ë‘˜ ì¤‘ í•˜ë‚˜ê°€ ëì— ë„ë‹¬í•˜ë©´ ì •ì§€
 	if (row == 0 || column == 0 || row == arr->end_row - 1 || column == arr->end_col - 1) return;	
 
-    //³ª¾Æ°¡´Â ¹æÇâÀ¸·Î °è¼Ó Å½»ö
+    //ë‚˜ì•„ê°€ëŠ” ë°©í–¥ìœ¼ë¡œ ê³„ì† íƒìƒ‰
     switch (direction) {							
     case LFUP:										
         find_dir(arr, row - 1, column - 1, LFUP);
@@ -111,7 +111,7 @@ void find_dir(struct Arr *arr, int row, int column, int direction) {
 
 
 int main() {
-    //ÁÖ¾îÁø ¹è¿­
+    //ì£¼ì–´ì§„ ë°°ì—´
     int src_arr[10][10] = { { 2,2,2,2,2,2,2,2,2,2 },
                             { 2,2,2,2,2,2,2,2,2,2 },
                             { 2,2,2,0,0,0,0,2,2,2 },
@@ -124,32 +124,32 @@ int main() {
                             { 2,2,2,2,2,2,2,2,2,2 }, };
 							
 
-	//±¸Á¶Ã¼ ÃÊ±âÈ­
-    //ÇàÀÇ ³¡°ú ¿­ÀÇ ³¡À» ÁöÁ¤
+	//êµ¬ì¡°ì²´ ì´ˆê¸°í™”
+    //í–‰ì˜ ëê³¼ ì—´ì˜ ëì„ ì§€ì •
 	struct Arr *arr = {src_arr};
 	int k = 0, p = 0;
     arr->end_row = sizeof(src_arr) / sizeof(src_arr[0]);
 	arr->end_col = sizeof(src_arr[0]) / sizeof(src_arr[0][0]);
 	
 
-    //Å½»öÀ» ½ÃÀÛÇÏ´Â ¿­°ú Çà
+    //íƒìƒ‰ì„ ì‹œì‘í•˜ëŠ” ì—´ê³¼ í–‰
     int start_row = 5;
     int start_col = 4;
 	//index
     int i = 0;
     int j = 0;
 	
-    //½ÃÀÛ À§Ä¡¸¦ ±âÁØÀ¸·Î »óÇÏÁÂ¿ì¸¦ Å½»öÇÏ¿© 0 -> 1·Î ¹Ù²Ş
+    //ì‹œì‘ ìœ„ì¹˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ìƒí•˜ì¢Œìš°ë¥¼ íƒìƒ‰í•˜ì—¬ 0 -> 1ë¡œ ë°”ê¿ˆ
     full_one(arr, start_row, start_col, -1);		
 
-	//½ÃÀÛ À§Ä¡¸¦ ±âÁØÀ¸·Î °¢°¢ ´ë°¢¼± ÁÂ»ó, ÁÂÇÏ, ¿ì»ó, ¿ìÇÏ¸¦ Å½»öÇÏ¿© 0 -> 1·Î ¹Ù²Ş
+	//ì‹œì‘ ìœ„ì¹˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ê°ê° ëŒ€ê°ì„  ì¢Œìƒ, ì¢Œí•˜, ìš°ìƒ, ìš°í•˜ë¥¼ íƒìƒ‰í•˜ì—¬ 0 -> 1ë¡œ ë°”ê¿ˆ
     find_dir(arr, start_row - 1, start_col - 1, LFUP);
     find_dir(arr, start_row + 1, start_col - 1, LFDN);
     find_dir(arr, start_row - 1, start_col + 1, RTUP);
     find_dir(arr, start_row + 1, start_col + 1, RTDN);
 
 	
-    //È®ÀÎ¿ë Ãâ·Â
+    //í™•ì¸ìš© ì¶œë ¥
     for (i = 0; i < arr->end_row; i++) {
         for (j = 0; j < arr->end_col; j++) {
             printf("%d ", arr->num[i][j]);
