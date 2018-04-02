@@ -129,7 +129,7 @@ int main(void) {
 	struct Arr *arr = {src_arr};
 	int k = 0, p = 0;
     arr->end_row = sizeof(src_arr) / sizeof(src_arr[0]);
-	arr->end_col = sizeof(src_arr[0]) / sizeof(src_arr[0][0]);
+    arr->end_col = sizeof(src_arr[0]) / sizeof(src_arr[0][0]);
 	
 
     //탐색을 시작하는 열과 행
