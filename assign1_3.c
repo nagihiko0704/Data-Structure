@@ -19,7 +19,7 @@ enum {
 /*
 배열의 정보가 담긴 구조체
 */
-struct Arr {
+typedef struct Arr {
     int num[11][10];//NULL을 고려하여 선언
     int end_row;    //행의 끝
     int end_col;    //열의 끝
@@ -110,7 +110,7 @@ void find_dir(struct Arr *arr, int row, int column, int direction) {
 }
 
 
-int main() {
+int main(void) {
     //주어진 배열
     int src_arr[10][10] = { { 2,2,2,2,2,2,2,2,2,2 },
                             { 2,2,2,2,2,2,2,2,2,2 },
