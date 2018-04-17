@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-typedef int element
+typedef int element;
 
 //스택의 노드를 위한 구조체 및 linkedstack 관련 구조체
 
@@ -24,6 +24,11 @@ void init(linkedstacktype * s) {
 	s->top = NULL;
 };
 
+
+int is_empty(linkedstacktype *s) {
+	
+	return (s->top == NULL);
+}
 
 
 //push 연산 
@@ -70,7 +75,7 @@ typedef struct {
 
 }pos;
 
-void push_loc()
+
 
 int main(void) {
 
