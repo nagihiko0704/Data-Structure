@@ -121,14 +121,14 @@ void provide() {
             printf("(%d, %s), ", news_queue.queue[news_queue.front].requestedBy, enumString[news_queue.queue[news_queue.front].fidelity]);
             
             //add user's informations
-            userInfo[news_queue.queue[news_queue.front].requestedBy].score += CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity;
+            userInfo[news_queue.queue[news_queue.front].requestedBy].score += (CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity);
             userInfo[news_queue.queue[news_queue.front].requestedBy].contentsNum++;
             userInfo[news_queue.queue[news_queue.front].requestedBy].requesting = 0;
             userInfo[news_queue.queue[news_queue.front].requestedBy].totalTime += userInfo[news_queue.queue[news_queue.front].requestedBy].standbyTime;
             userInfo[news_queue.queue[news_queue.front].requestedBy].standbyTime = 0;
 
             
-            i += CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity;
+            i += (CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity);
 
             //if front reaches end of queue, it goes back to 0(first)
             news_queue.front = (news_queue.front + 1) % SIZE_QUEUE;
