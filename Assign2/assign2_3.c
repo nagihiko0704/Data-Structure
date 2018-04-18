@@ -47,7 +47,7 @@ void request() {
             continue;
         }
         //a user requests a content at a 50 percent
-        if (rand() % 2) {
+        if (!(rand() % 2)) {
             printf("%d, ", user);
             news_queue.queue[news_queue.rear].requestedBy = user;
             news_queue.queue[news_queue.rear].fidelity = currentFidelity;
@@ -133,7 +133,9 @@ void provide() {
             userInfo[news_queue.queue[news_queue.front].requestedBy].score += CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity;
             userInfo[news_queue.queue[news_queue.front].requestedBy].contentsNum++;
             userInfo[news_queue.queue[news_queue.front].requestedBy].requesting = 0;
+            userInfo[news_queue.queue[news_queue.front].requestedBy].totalTime += userInfo[news_queue.queue[news_queue.front].requestedBy].standbyTime;
             userInfo[news_queue.queue[news_queue.front].requestedBy].standbyTime = 0;
+
             
             i += CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity;
 
@@ -157,7 +159,6 @@ void provide() {
     //Add waiting time
     for (int i = 0; i < news_queue.len; i++) {
         userInfo[news_queue.queue[flag].requestedBy].standbyTime++;
-        userInfo[news_queue.queue[flag].requestedBy].totalTime++;
 
         //if flag reaches end of queue, it goes back to 0(first)
         if (flag < SIZE_QUEUE - 1) {
