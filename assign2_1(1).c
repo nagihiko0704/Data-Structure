@@ -38,7 +38,7 @@ int main(void)
 		//StudentNode의 node에 정보 저장
 		s[i]->node = student[i];
 
-		//score 오름차 순으로 list에 삽입하는 dinset_node함수 호출
+		//score 내림차 순으로 list에 삽입하는 dinset_node함수 호출
 		dinsert_node(&head_node, s[i]);
 	}
 
@@ -88,7 +88,7 @@ void init_list(StudentNode *head_node)
 	head_node->next = head_node;
 }
 
-//head_node와 new_node를 받아 score의 오름차로 삽입하는 함수
+//head_node와 new_node를 받아 score의 내림차로 삽입하는 함수
 void dinsert_node(StudentNode *head_node, StudentNode *new_node)
 {
 	StudentNode *temp;
@@ -97,7 +97,7 @@ void dinsert_node(StudentNode *head_node, StudentNode *new_node)
 	//삽입할 노드의 score보다 작은 score를 가진 노드가 나타나기 전
 	//그러한 노드가 없다면 마지막 노드까지 포인터를 이동시킴
 	while (temp->next != head_node
-		&& temp->next->node.score <= new_node->node.score)
+		&& temp->next->node.score >= new_node->node.score)
 	{
 		temp = temp->next;
 	}
@@ -117,9 +117,21 @@ void print_list(StudentNode *head_node)
 
 	printf("\n정렬됨\n");
 
-	while (temp->next != head_node)
+	//상위 10명 출력
+	printf("\n----------상위 10명----------\n");
+	for (int i = 0; i < 10; i++)
 	{
 		temp = temp->next;
+		printf("%d\t%-20s \t %d\n", temp->node.student_number, temp->node.name, temp->node.score);
+	}
+
+	temp = head_node;
+
+	//하위 10명 출력
+	printf("\n----------하위 10명----------\n");
+	for (int i = 0; i < 10; i++)
+	{
+		temp = temp->prev;
 		printf("%d\t%-20s \t %d\n", temp->node.student_number, temp->node.name, temp->node.score);
 	}
 }
