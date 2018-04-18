@@ -54,12 +54,8 @@ void request() {
             userInfo[user].requesting = 1;
             
             //if rear reaches end of queue, it goes back to 0(first)
-            if (news_queue.rear < SIZE_QUEUE - 1) {
-                news_queue.rear++;
-            }
-            else {
-                news_queue.rear = 0;
-            }
+            news_queue.rear = (news_queue.rear + 1) % SIZE_QUEUE;
+
             news_queue.len++;
         }
     }
@@ -78,12 +74,7 @@ void setFidelity() {
         totalTime += userInfo[news_queue.queue[flag].requestedBy].standbyTime;
 
         //if flag reaches end of queue, it goes back to 0(first)
-        if (flag < SIZE_QUEUE - 1) {
-            flag++;
-        }
-        else {
-            flag = 0;
-        }
+        flag = (flag + 1) % SIZE_QUEUE;
     }
 
     //if queue's length is blank, averTime == 0
@@ -140,12 +131,8 @@ void provide() {
             i += CONTENT_VARIETY - news_queue.queue[news_queue.front].fidelity;
 
             //if front reaches end of queue, it goes back to 0(first)
-            if (news_queue.front < SIZE_QUEUE - 1) {
-                news_queue.front++;
-            }
-            else {
-                news_queue.front = 0;
-            }
+            news_queue.front = (news_queue.front + 1) % SIZE_QUEUE;
+
             news_queue.len--;
         }
         else {
@@ -161,12 +148,7 @@ void provide() {
         userInfo[news_queue.queue[flag].requestedBy].standbyTime++;
 
         //if flag reaches end of queue, it goes back to 0(first)
-        if (flag < SIZE_QUEUE - 1) {
-            flag++;
-        }
-        else {
-            flag = 0;
-        }
+        flag = (flag + 1) % SIZE_QUEUE;
     }
 }
 
@@ -181,12 +163,7 @@ void printQueue() {
         printf("(%d, %s), ", news_queue.queue[flag].requestedBy, enumString[news_queue.queue[flag].fidelity]);
 
         //if flag reaches end of queue, it goes back to 0(first)
-        if (flag < SIZE_QUEUE - 1) {
-            flag++;
-        }
-        else {
-            flag = 0;
-        }
+        flag = (flag + 1) % SIZE_QUEUE;
     }
     printf("]\n");
 }
