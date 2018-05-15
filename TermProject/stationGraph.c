@@ -11,6 +11,7 @@
 */
 typedef struct
 {
+    int num;        // 역 번호
     char name[20];  // 역명
     int line;       // 호선
     float dis;      // 해당역부터의 거리
@@ -31,18 +32,22 @@ typedef struct
 
 void init_station(Station *s);
 void insert_station(Station *s);
+void insert_edge(Station *s);
 
 int main()
 {
     Station s;
     init_station(&s);
     insert_station(&s);
+    insert_edge(&s);
 
-    printf("%s %d %f %d %d\n", s.node[0]->name, s.node[0]->line, s.node[0]->dis, s.node[0]->transfer, s.node[0]->toilet);
-    s.node[0] = s.node[0]->link;
-    printf("%s %d %f %d %d\n", s.node[0]->name, s.node[0]->line, s.node[0]->dis, s.node[0]->transfer, s.node[0]->toilet);
-    s.node[0] = s.node[0]->link;
-    printf("%s %d %f %d %d\n", s.node[0]->name, s.node[0]->line, s.node[0]->dis, s.node[0]->transfer, s.node[0]->toilet);
+    // 확인용 출력
+    int viewNum = 68;
+    printf("From %s Station(StationNum : %d, line %d) %.1fkm Can%s transer. Toilet in ticket gate %c\n", s.node[viewNum]->name, s.node[viewNum]->num, s.node[viewNum]->line, s.node[viewNum]->dis, s.node[viewNum]->transfer ? "" : "not", s.node[viewNum]->toilet ? 'O' : 'X');
+    s.node[viewNum] = s.node[viewNum]->link;
+    printf("to %s Station(StationNum : %d, line %d) %.1fkm Can%s transer. Toilet in ticket gate %c\n", s.node[viewNum]->name, s.node[viewNum]->num, s.node[viewNum]->line, s.node[viewNum]->dis, s.node[viewNum]->transfer ? "" : "not", s.node[viewNum]->toilet ? 'O' : 'X');
+    s.node[viewNum] = s.node[viewNum]->link;
+    printf("to %s Station(StationNum : %d, line %d) %.1fkm Can%s transer. Toilet in ticket gate %c\n", s.node[viewNum]->name, s.node[viewNum]->num, s.node[viewNum]->line, s.node[viewNum]->dis, s.node[viewNum]->transfer ? "" : "not", s.node[viewNum]->toilet ? 'O' : 'X');
 
     return 0;
 }
@@ -56,6 +61,10 @@ void init_station(Station *s)
     }
 }
 
+
+/*
+노드 정보를 Station 구조체의 StationNode배열에 입력
+*/
 void insert_station(Station *s)
 {
     FILE *fp;
@@ -69,34 +78,66 @@ void insert_station(Station *s)
 
     char tmpName[20] = " ";
 
-    //정보를 리스트에 입력
+    // 역 정보를 배열에 입력
     for (int i = 0; i < MAXNODE && !feof(fp); i++)
     {
         StationNode *node = (StationNode*)malloc(sizeof(StationNode));
-        StationNode *end = (StationNode*)malloc(sizeof(StationNode));
-        if (node == NULL || end == NULL) return;
+        if (node == NULL) return;
 
-        s->node[i] = node;
         node->link = NULL;
         fscanf_s(fp, "%s", tmpName, _countof(tmpName));
-        strcpy_s(s->node[i]->name, sizeof(s->node[i]->name), tmpName);
-        fscanf_s(fp, "%d\t", &(s->node[i]->line));
+        strcpy_s(node->name, sizeof(node->name), tmpName);
+        fscanf_s(fp, "%d\t", &(node->num));
+        fscanf_s(fp, "%d\t", &(node->line));
         node->dis = 0;
-        fscanf_s(fp, "%d\t", &(s->node[i]->transfer));
-        fscanf_s(fp, "%d\t", &(s->node[i]->toilet));
-        s->count++;
-        end = node;
+        fscanf_s(fp, "%d\t", &(node->transfer));
+        fscanf_s(fp, "%d\t", &(node->toilet));
 
-        while(1)
+        s->node[node->num] = node;
+        s->count++;
+    }
+
+    fclose(fp);
+}
+
+/*
+입력된 각 노드들을 서로 연결
+*/
+void insert_edge(Station *s)
+{
+    FILE *fp;
+    fopen_s(&fp, "Station_Edge.txt", "r");
+
+    if (fp == NULL)
+    {
+        printf("Fail to open the file.\n");
+        return -1;
+    }
+
+    for (int i = 0; i < s->count && !feof(fp); i++)
+    {
+        int stationNum = 0;
+        fscanf_s(fp, "%d\t", &stationNum);
+
+        StationNode *end = (StationNode*)malloc(sizeof(StationNode));
+        if (end == NULL) return;
+
+        end = s->node[stationNum];
+        while (1)
         {
+            int connectedStationNum = 0;
+            fscanf_s(fp, "%d\t", &connectedStationNum);
+
             StationNode *connectedNode = (StationNode*)malloc(sizeof(StationNode));
+            if (connectedNode == NULL) return;
+
+            connectedNode->num = s->node[connectedStationNum]->num;
+            strcpy_s(connectedNode->name, sizeof(connectedNode->name), s->node[connectedStationNum]->name);
+            connectedNode->line = s->node[connectedStationNum]->line;
+            fscanf_s(fp, "%f", &(connectedNode->dis));
+            connectedNode->transfer = s->node[connectedStationNum]->transfer;
+            connectedNode->toilet = s->node[connectedStationNum]->toilet;
             connectedNode->link = NULL;
-            fscanf_s(fp, "%s\t", tmpName, _countof(tmpName));
-            strcpy_s(connectedNode->name, sizeof(connectedNode->name), tmpName);
-            fscanf_s(fp, "%d\t", &(connectedNode->line));
-            fscanf_s(fp, "%f\t", &(connectedNode->dis));
-            fscanf_s(fp, "%d\t", &(connectedNode->transfer));
-            fscanf_s(fp, "%d", &(connectedNode->toilet));
 
             end->link = connectedNode;
             end = end->link;
@@ -107,4 +148,6 @@ void insert_station(Station *s)
         end = NULL;
         free(end);
     }
+
+    fclose(fp);
 }
