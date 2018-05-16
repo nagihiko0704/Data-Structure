@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAXNODE 1000
+#define INF 100000
 #define TRUE 1
 #define FALSE 0
 
@@ -29,17 +30,57 @@ typedef struct
     StationNode *node[MAXNODE];
 }Station;
 
+/*
+힙 노드
+*/
+typedef struct
+{
+    int dist;	// 시작점으로부터의 거리
+    int num;	// 역 번호
+    int short_station;	//가장 가까운 역
+}HeapNode;
+
+/*
+힙 트리
+*/
+typedef struct
+{
+    HeapNode node[MAXNODE];
+    int node_num;
+}Heap;
+
 
 void init_station(Station *s);
 void insert_station(Station *s);
 void insert_edge(Station *s);
+void init_heap(Heap *h);
+void insert_node_min_heap(Heap *h, HeapNode node);
+HeapNode delete_node_min_heap(Heap *h);
 
 int main()
 {
+    int from, to;
     Station s;
     init_station(&s);
     insert_station(&s);
     insert_edge(&s);
+    Heap h;
+    init_heap(&h);
+    
+    while (TRUE)
+    {
+        printf("종료하려면 -1을 입력해주세요\n");
+        printf("출발역을 입력해주세요 : ");
+        scanf_s("%d", &from);
+        printf("도착역을 입력해주세요 : ");
+        scanf_s("%d", &to);
+        if (from == -1 || to == -1) break;
+        if (0 > from || from > MAXNODE || 0 > to ||to > MAXNODE)
+        {
+            printf("입력이 잘못 되었습니다.\n");
+            continue;
+        }
+    }
 
     // 확인용 출력
     int viewNum = 68;
@@ -123,7 +164,7 @@ void insert_edge(Station *s)
         if (end == NULL) return;
 
         end = s->node[stationNum];
-        while (1)
+        while (TRUE)
         {
             int connectedStationNum = 0;
             fscanf_s(fp, "%d\t", &connectedStationNum);
@@ -150,4 +191,55 @@ void insert_edge(Station *s)
     }
 
     fclose(fp);
+}
+
+void init_heap(Heap *h)
+{
+    h->node_num = 0;
+    for (int i = 0; i < MAXNODE; i++) {
+        h->node[i].dist = INF;
+    }
+}
+
+void insert_node_min_heap(Heap *h, HeapNode node)
+{
+    int i = ++(h->node_num);
+
+    while (i != 1 && (node.dist < h->node[i / 2].dist))
+    {
+        h->node[i] = h->node[i / 2];
+        i /= 2;
+    }
+
+    h->node[i] = node;
+}
+
+HeapNode delete_node_min_heap(Heap *h)
+{
+    int parent, child;
+    HeapNode node, tmp;
+
+    node = h->node[1];
+    tmp = h->node[h->node_num--];
+    h->node[1] = tmp;
+    parent = 1;
+    child = 2;
+
+    while (child <= h->node_num)
+    {
+        // 자식 노드 중 작은 걸 선택
+        if (child < h->node_num && (h->node[child].dist > h->node[child + 1].dist))
+        {
+            child++;
+        }
+        // 자식 노드가 더 크면 중지
+        if (tmp.dist <= h->node[child].dist) break;
+
+        h->node[parent] = h->node[child];
+        parent = child;
+        child *= 2;
+    }
+    h->node[parent] = tmp;
+
+    return node;
 }
