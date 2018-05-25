@@ -23,16 +23,22 @@ typedef struct
 
 enum Vertex
 {
-    S = 0,
-    A = 1,
-    B = 2,
-    C = 3,
-    D = 4,
-    E = 5,
-    F = 6,
-    G = 7,
-    H = 8
+    S,
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    G,
+    H
 };
+
+static char enum_string(enum Vertex v)
+{
+    static const char str[] = { 'S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+    return str[v];
+}
 
 //탐색한 노드 - 0은 미탐색, 1은 탐색
 int found[MAX_NODE];
@@ -43,40 +49,26 @@ void init_heap(HeapType *h);
 void insert_min_heap(HeapType *h, int start_edge, int end_edge, int dis);
 Heap delete_min_heap(HeapType *h);
 void find_path(Graph *g, HeapType *h, int start_edge);
+void floyd(Graph *g);
+void display(Graph *g, int start_edge, int end_edge);
+void display_all(Graph *g);
 
 int main()
 {
-    Graph g;
+    Graph g1, g2;
     HeapType h;
 
-    init_graph(&g);
+    init_graph(&g1);
+    init_graph(&g2);
     init_heap(&h);
 
-    
-    insert_edge(&g, S, A, 7);
-    insert_edge(&g, S, F, 4);
-    insert_edge(&g, A, B, 5);
-    insert_edge(&g, A, E, 2);
-    insert_edge(&g, B, C, 4);
-    insert_edge(&g, C, D, 2);
-    insert_edge(&g, C, H, 6);
-    insert_edge(&g, D, G, 8);
-    insert_edge(&g, E, D, 3);
-    insert_edge(&g, E, F, 11);
-    insert_edge(&g, F, G, 9);
-    insert_edge(&g, G, H, 1);
-    
+    find_path(&g1, &h, S);
+    floyd(&g2);
 
-    find_path(&g, &h, S);
-
-    for (int i = 0; i < MAX_NODE; i++)
-    {
-        printf("%d ", g.node[S][i]);
-    }
-    printf("\n");
+    display(&g1, S, H);
+    display_all(&g2);
     return 0;
 }
-
 
 /*
 그래프의 모든 행렬을 INF로 초기화
@@ -88,9 +80,22 @@ void init_graph(Graph *g)
     {
         for (int j = 0; j < MAX_NODE; j++)
         {
-            g->node[i][j] = INF;
+            if (i == j) g->node[i][j] = 0;
+            else g->node[i][j] = INF;
         }
     }
+    insert_edge(g, S, A, 7);
+    insert_edge(g, S, F, 4);
+    insert_edge(g, A, B, 5);
+    insert_edge(g, A, E, 2);
+    insert_edge(g, B, C, 4);
+    insert_edge(g, C, D, 2);
+    insert_edge(g, C, H, 6);
+    insert_edge(g, D, G, 8);
+    insert_edge(g, E, D, 3);
+    insert_edge(g, E, F, 11);
+    insert_edge(g, F, G, 9);
+    insert_edge(g, G, H, 1);
 }
 
 /*
@@ -201,4 +206,59 @@ void find_path(Graph *g, HeapType *h, int start_edge)
             }
         }
     }
+}
+
+/*
+플로이드 알고리즘
+*/
+void floyd(Graph *g)
+{
+    //가운데 노드
+    for (int k = 0; k < MAX_NODE; k++)
+    {
+        //시작 노드
+        for (int i = 0; i < MAX_NODE; i++)
+        {
+            //끝 노드
+            for (int j = 0; j < MAX_NODE; j++)
+            {
+                if (g->node[i][j] > g->node[i][k] + g->node[k][j])
+                {
+                    g->node[i][j] = g->node[i][k] + g->node[k][j];
+                }
+            }
+        }
+    }
+}
+
+/*
+한 노드의 최단 거리 출력
+*/
+void display(Graph *g, int start_edge, int end_edge)
+{
+    printf("%c에서 %c까지의 최단 거리 : %d\n", enum_string(start_edge), enum_string(end_edge), g->node[start_edge][end_edge]);
+}
+
+/*
+모든 최단 거리 출력
+*/
+void display_all(Graph *g)
+{
+    printf("   ");
+    for (int i = 0; i < MAX_NODE; i++)
+    {
+        printf("%c  ", enum_string(i));
+    }
+    printf("\n");
+
+    for (int i = 0; i < MAX_NODE; i++)
+    {
+        printf("%c  ", enum_string(i));
+        for (int j = 0; j < MAX_NODE; j++)
+        {
+            printf("%-2d ", g->node[i][j]);
+        }
+        printf("\n");
+    }
+
 }
