@@ -1,6 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 #include "station.h"
 
+/*
+Station 구조체 초기화
+*/
 void init_station(Station *s)
 {
 	s->count = 0;
@@ -39,6 +43,7 @@ void insert_station(Station *s)
 		strcpy_s(node->name, sizeof(node->name), tmpName);
 		//역번호
 		fscanf_s(fp, "%d\t", &(node->num));
+        //역 호선
 		fscanf_s(fp, "%d\t", &(node->line));
 
 		node->dis = 0;
@@ -78,24 +83,23 @@ void insert_edge(Station *s)
 		if (end == NULL) return;
 
 		end = s->node[stationNum];
+
 		while (TRUE)
 		{
-			int connectedStationNum = 0;
+			int connectedStationNum = 0;    //연결하려는 역 번호
 			fscanf_s(fp, "%d\t", &connectedStationNum);
 
 			StationNode *connectedNode = (StationNode*)malloc(sizeof(StationNode));
 			if (connectedNode == NULL) return;
 
-			connectedNode->num = s->node[connectedStationNum]->num;
-			strcpy_s(connectedNode->name, sizeof(connectedNode->name), s->node[connectedStationNum]->name);
-			connectedNode->line = s->node[connectedStationNum]->line;
+            //Station 노드에서 역 정보 복사
+            memcpy_s(connectedNode, sizeof(StationNode), s->node[connectedStationNum], sizeof(StationNode));
 			fscanf_s(fp, "%f", &(connectedNode->dis));
-			connectedNode->transfer = s->node[connectedStationNum]->transfer;
-			connectedNode->toilet = s->node[connectedStationNum]->toilet;
 			connectedNode->link = NULL;
 
 			end->link = connectedNode;
 			end = end->link;
+
 			char ch = fgetc(fp);
 			if (ch == '\n' || ch == EOF) break;
 		}
