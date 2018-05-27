@@ -50,14 +50,13 @@ void enqueue(QueueType *q, Student s);
 Student dequeue(QueueType *q);
 void radix_sort(StudentNode *s, QueueType q[]);
 
-
 int main(void)
 {
     Student student[100];
     StudentNode *s = (StudentNode*)malloc(sizeof(StudentNode));
     QueueType q[BUCKETS];
-
-    int testcount = 1000;
+    
+    int testcount = 100;
     size = sizeof(student) / sizeof(student[0]);
 
     //student 구조체 초기화
@@ -155,13 +154,13 @@ int main(void)
 
 
 
-    printf("Selection sort \t* %d = %.fms\n", testcount, (double)t_selection);
-    printf("Insertion sort \t* %d = %.fms\n", testcount, (double)t_insertion);
-    printf("Bubble sort \t* %d = %.fms\n", testcount, (double)t_bubble);
-    printf("Shell sort \t* %d = %.fms\n", testcount, (double)t_shell);
-    printf("Merge sort \t* %d = %.fms\n", testcount, (double)t_merge);
-    printf("Quick sort \t* %d = %.fms\n", testcount, (double)t_quick);
-    printf("Radix sort \t* %d = %.fms\n", testcount, (double)t_radix);
+    printf("Selection sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_selection, (double)t_selection/testcount);
+    printf("Insertion sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_insertion, (double)t_insertion / testcount);
+    printf("Bubble sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_bubble, (double)t_bubble / testcount);
+    printf("Shell sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_shell, (double)t_shell / testcount);
+    printf("Merge sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_merge, (double)t_merge / testcount);
+    printf("Quick sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_quick, (double)t_quick / testcount);
+    printf("Radix sort \t* %d = %.fms\taverage : %.fms\n", testcount, (double)t_radix, (double)t_radix / testcount);
     return 0;
 }
 
@@ -442,11 +441,11 @@ void radix_sort(StudentNode *s, QueueType q[])
         {
             enqueue(&q[(s->node[i].score / factor) % 10], s->node[i]);
         }
-        for (int i = 0, j = size; i < BUCKETS; i++)
+        for (int i = BUCKETS - 1, j = 0; i >= 0; i--)
         {
             while (!is_empty(&q[i]))
             {
-                s->node[--j] = dequeue(&q[i]);
+                s->node[j++] = dequeue(&q[i]);
             }
         }
         factor *= 10;
