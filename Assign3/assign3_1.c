@@ -29,6 +29,7 @@ typedef struct
 }QueueType;
 
 int size;
+Student sorted[100];
 
 void init_student(Student s[]);
 void init_score(StudentNode *s);
@@ -56,7 +57,7 @@ int main(void)
     StudentNode *s = (StudentNode*)malloc(sizeof(StudentNode));
     QueueType q[BUCKETS];
     
-    int testcount = 100;
+    int testcount = 1000;
     size = sizeof(student) / sizeof(student[0]);
 
     //student 구조체 초기화
@@ -197,7 +198,7 @@ void init_score(StudentNode *s)
     srand((unsigned)time(NULL));
     for (int i = 0; i < size; i++)
     {
-        s->node[i].score = rand() % 101;
+        s->node[i].score = rand() % 100;
     }
 }
 
@@ -241,6 +242,7 @@ void selection_sort(StudentNode *s)
         swap(s, i, most);
     }
 }
+
 void insertion_sort(StudentNode *s)
 {
     Student key;
@@ -256,6 +258,7 @@ void insertion_sort(StudentNode *s)
         s->node[most + 1] = key;
     }
 }
+
 void bubble_sort(StudentNode *s)
 {
     for (int i = size-1; i >= 0; i--)
@@ -269,6 +272,7 @@ void bubble_sort(StudentNode *s)
         }
     }
 }
+
 void shell_sort(StudentNode *s)
 {
     for (int gap = size / 2; gap > 0; gap /= 2)
@@ -296,8 +300,6 @@ void dec_insertion_sort(StudentNode *s, int start, int gap)
         s->node[most + gap] = key;
     }
 }
-
-Student sorted[100];
 
 void merge(StudentNode *s, int left, int mid, int right)
 {
