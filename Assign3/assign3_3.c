@@ -53,7 +53,7 @@ void floyd(Graph *g);
 void display(Graph *g, int start_edge, int end_edge);
 void display_all(Graph *g);
 
-int main()
+int main(void)
 {
     Graph g1, g2;
     HeapType h;
