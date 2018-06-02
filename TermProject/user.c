@@ -6,23 +6,6 @@
 int compare(const void *a, const void *b);
 
 /*
-문자열을 숫자로 바꿔줌
-*/
-int get_month(char c[])
-{
-    const char *DAY_STR[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-    for (int i = 0; i < 12; i++)
-    {
-        if (strcmp(DAY_STR[i], c) == 0)
-        {
-            return i + 1;
-        }
-    }
-
-    return -1;
-}
-
-/*
 UserType초기화
 */
 void init_userType(UserType *u)
@@ -156,7 +139,9 @@ void add_friends(UserType *u)
     fclose(fp);
 }
 
-
+/*
+멘션 추가
+*/
 void add_mentions(UserType *u)
 {
     FILE *fp;
