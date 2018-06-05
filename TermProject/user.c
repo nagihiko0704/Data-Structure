@@ -3,7 +3,13 @@
 #include <string.h>
 #include "user.h"
 
-int compare(const void *a, const void *b);
+void init(UserType *u)
+{
+	init_userType(u);
+	insert_user(u);
+	add_friends(u);
+	add_mentions(u);
+}
 
 /*
 UserType초기화
@@ -43,6 +49,7 @@ void insert_user(UserType *u)
         //가입날짜
         fscanf_s(fp, "%[^\n]\n", temp, sizeof(temp));
         strcpy_s(user->sign_up_date, sizeof(temp), temp);
+
         //닉네임
         fscanf_s(fp, "%s\n", temp, sizeof(temp));
         strcpy_s(user->name, sizeof(temp), temp);
@@ -108,8 +115,8 @@ void add_friends(UserType *u)
         fscanf_s(fp, "%d\n", &user_id);
         fscanf_s(fp, "%d\n", &friend_id);
 
-        User *temp = (User*)malloc(sizeof(User));   //친구를 연결할 임시 변수
-        User *friendUser = (User*)malloc(sizeof(User)); //연결할 친구
+        User *temp = (User*)malloc(sizeof(User));			//친구를 연결할 임시 변수
+        User *friendUser = (User*)malloc(sizeof(User));		//연결할 친구
 
         if (temp == NULL || friendUser == NULL) return;
 
@@ -117,6 +124,7 @@ void add_friends(UserType *u)
 
         //friends를 NULL로 만들기 위한 구조체 복사
         memcpy_s(friendUser, sizeof(friendUser), temp, sizeof(temp));
+
         //요소 복사
         strcpy_s(friendUser->name , sizeof(friendUser->name), temp->name);
         strcpy_s(friendUser->sign_up_date, sizeof(friendUser->sign_up_date), temp->sign_up_date);
