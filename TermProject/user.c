@@ -118,8 +118,8 @@ void add_friends(UserType *u)
         fscanf_s(fp, "%d\n", &user_id);
         fscanf_s(fp, "%d\n", &friend_id);
 
-        User *temp = (User*)malloc(sizeof(User));			//친구를 연결할 임시 변수
-        User *friendUser = (User*)malloc(sizeof(User));		//연결할 친구
+        User *temp = (User*)malloc(sizeof(User));           //친구를 연결할 임시 변수
+        User *friendUser = (User*)malloc(sizeof(User));     //연결할 친구
 
         if (temp == NULL || friendUser == NULL) return;
 
@@ -151,7 +151,7 @@ void add_friends(UserType *u)
 }
 
 /*
-멘션 추가
+트윗 추가
 */
 void add_tweets(UserType *u)
 {
@@ -168,40 +168,40 @@ void add_tweets(UserType *u)
 
     for (int i = 0; !feof(fp); i++)
     {
-        Word *word = (Word*)malloc(sizeof(Word));
+        TweetType *tweet = (TweetType*)malloc(sizeof(TweetType));
         User *user = (User*)malloc(sizeof(User));
-        Word *temp = (Word*)malloc(sizeof(Word));
+        TweetType *temp = (TweetType*)malloc(sizeof(TweetType));
 
-        if (user == NULL || word == NULL || temp == NULL) return;
+        if (user == NULL || tweet == NULL || temp == NULL) return;
 
         int user_id = 0;
         char date[35];
-        char tweet[270];
+        char temp_tweet[270];
 
-        //멘션한 유저ID
+        //트윗한 유저ID
         fscanf_s(fp, "%d\n", &user_id);
-        //멘션한 날짜
+        //트윗한 날짜
         fscanf_s(fp, "%[^\n]\n", date, sizeof(date));
-        //멘션 내용
-        fscanf_s(fp, "%[^\n]\n", tweet, sizeof(tweet));
+        //트윗 내용
+        fscanf_s(fp, "%[^\n]\n", temp_tweet, sizeof(temp_tweet));
 
         //유저
         user = u->user[find_user_index(u, user_id, 0, u->count - 1)];
         temp = user->tweets;
 
-        //맨 처음 멘션이면 바로 연결
-        if (temp == NULL) user->tweets = word;
+        //맨 처음 트윗이면 바로 연결
+        if (temp == NULL) user->tweets = tweet;
         //아니면 끝을 찾음
         else
         {
             while (temp->next_tweet != NULL) temp = temp->next_tweet;
-            temp->next_tweet = word;
+            temp->next_tweet = tweet;
         }
         
         //내용 복사
-        strcpy_s(word->tweet, sizeof(word->tweet), tweet);
-        strcpy_s(word->upload_date, sizeof(word->upload_date), date);
-        word->next_tweet = NULL;
+        strcpy_s(tweet->tweet, sizeof(tweet->tweet), temp_tweet);
+        strcpy_s(tweet->upload_date, sizeof(tweet->upload_date), date);
+        tweet->next_tweet = NULL;
 
         //메모리 해제
         user = NULL;
