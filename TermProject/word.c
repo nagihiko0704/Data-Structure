@@ -68,7 +68,7 @@ void insert_word(Heap *h, UserType *u, Word *w)
 }
 
 /*
-입력된 단어를 Heap 정렬
+입력된 단어를 사전 순으로 Heap 정렬
 */
 void heap_sort(Heap *h, UserType *u)
 {
@@ -93,7 +93,7 @@ void heap_sort(Heap *h, UserType *u)
 }
 
 /*
-min_heap에 단어 삽입
+min_heap에 단어 사전 순으로 삽입
 */
 void insert_min_heap(Heap *h, char *word, int id_num)
 {
@@ -151,7 +151,7 @@ void find_user(Word *w, UserType *u, char find_word[])
         return;
     }
 
-    printf("The User who used %s : ", find_word);
+    printf("The user who used %s : ", find_word);
 
     for (int i = 0; i < w->node[index]->count; i++)
     {
@@ -188,3 +188,70 @@ void count_word(Word *w, char word[])
     
     printf("The number of %s used : %d\n", word, w->node[index]->count);
 }
+
+/*
+단어가 사용된 횟수에 따라 오름차순 정렬
+*/
+Word *num_sort(Word *w)
+{
+    Word *sorted = (Word*)malloc(sizeof(Word));
+    if (sorted == NULL) return;
+
+    memcpy_s(sorted, sizeof(*sorted), w, sizeof(*w));    //메모리 복사
+
+    quick_sort(sorted, 0, sorted->size-1);  //정렬
+
+    return sorted;
+}
+
+int partition(Word *w, int left, int right)
+{
+    WordNode *pivot;
+    int low, high, mid;
+
+    high = left;
+    low = right + 1;
+    mid = (left + right) / 2;
+    swap(w, left, mid);
+    pivot = w->node[left];
+    do
+    {
+        do
+        {
+            high++;
+        } while (high <= right && w->node[high]->count > pivot->count);
+        do
+        {
+            low--;
+        } while (low >= left && w->node[low]->count < pivot->count);
+        if (high < low)
+        {
+            swap(w, high, low);
+        }
+    } while (high < low);
+
+    swap(w, left, low);
+    return low;
+}
+
+void quick_sort(Word *w, int left, int right)
+{
+    if (left < right)
+    {
+        int q = partition(w, left, right);
+        quick_sort(w, left, q - 1);
+        quick_sort(w, q + 1, right);
+    }
+}
+
+void swap(Word *w, int left, int mid)
+{
+    WordNode *temp = (WordNode*)malloc(sizeof(WordNode));
+    temp = w->node[mid];
+    w->node[mid] = w->node[left];
+    w->node[left] = temp;
+
+    temp = NULL;
+    free(temp);
+}
+
