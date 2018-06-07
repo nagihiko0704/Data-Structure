@@ -84,7 +84,70 @@ int get_max_friend_num(UserType *user)
 
 	return max;
 }
-void find_friend(UserType *user)
+
+/*
+한 유저의 친구 찾기
+*/
+void find_friend(UserType *user, int id_num)
 {
-	
+    int index = find_user_index(user, id_num, 0, user->count - 1);
+    User *user_node = (User*)malloc(sizeof(User));
+    if (user_node == NULL) return;
+
+    user_node = user->user[index];
+    printf("The friends of %s : ", user_node->name);
+    user_node = user_node->friends;
+
+    while (user_node != NULL)
+    {
+        printf("%s, ", user_node->name);
+        user_node = user_node->friends;
+    }
+
+    printf("\n");
+    free(user_node);
+}
+
+/*
+두 유저의 공통 친구 찾기 있으면 출력하고 1 없으면 0 반환
+*/
+int find_common_friend(UserType *user, int id_num1, int id_num2)
+{
+    int flag = 0;
+    int index1 = find_user_index(user, id_num1, 0, user->count - 1);
+    int index2 = find_user_index(user, id_num2, 0, user->count - 1);
+
+    User *user_node1 = (User*)malloc(sizeof(User));
+    User *user_node2 = (User*)malloc(sizeof(User));
+    if (user_node1 == NULL || user_node2 == NULL) return;
+
+    user_node1 = user->user[index1];
+    user_node2 = user->user[index2];
+
+    user_node1 = user_node1->friends;
+    while (user_node1 != NULL)
+    {
+        user_node2 = user->user[index2]->friends;
+        while (user_node2 != NULL)
+        {
+            if (user_node1->id_num == user_node2->id_num)
+            {
+                if (flag == 0)
+                {
+                    printf("The common friends between %20s and %20s : ", user->user[index1]->name, user->user[index2]->name);
+                }
+                printf("%s, ", user_node1->name);
+                flag = 1;
+            }
+            user_node2 = user_node2->friends;
+        }
+        user_node1 = user_node1->friends;
+    }
+
+    if (!flag) return 0;
+    else
+    {
+        printf("\n");
+        return 1;
+    }
 }
