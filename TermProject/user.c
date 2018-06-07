@@ -6,27 +6,27 @@
 /*
 UserType에 정보 입력
 */
-void init(UserType *u)
+void init(UserType *user)
 {
-	init_userType(u);
-	insert_user(u);
-	add_friends(u);
-	add_tweets(u);
+	init_userType(user);
+	insert_user(user);
+	add_friends(user);
+	add_tweets(user);
 }
 
 /*
 UserType초기화
 */
-void init_userType(UserType *u)
+void init_userType(UserType *user)
 {
-    u->count = 0;
+    user->count = 0;
 }
 
 
 /*
 유저 정보 입력
 */
-void insert_user(UserType *u)
+void insert_user(UserType *user)
 {
     FILE *fp;
     fopen_s(&fp, "user.txt", "r");
@@ -42,30 +42,30 @@ void insert_user(UserType *u)
 
     for (int i = 0; !feof(fp); i++)
     {
-        User *user = (User*)malloc(sizeof(User));
+        User *user_node = (User*)malloc(sizeof(User));
 
-        if (user == NULL) return;
+        if (user_node == NULL) return;
 
         //고유번호
-        fscanf_s(fp, "%d\n", &user->id_num);
+        fscanf_s(fp, "%d\n", &user_node->id_num);
 
         //가입날짜
         fscanf_s(fp, "%[^\n]\n", temp, sizeof(temp));
-        strcpy_s(user->sign_up_date, sizeof(temp), temp);
+        strcpy_s(user_node->sign_up_date, sizeof(temp), temp);
 
         //닉네임
         fscanf_s(fp, "%s\n", temp, sizeof(temp));
-        strcpy_s(user->name, sizeof(temp), temp);
+        strcpy_s(user_node->name, sizeof(temp), temp);
 
-        user->friends = NULL;
-        user->tweets = NULL;
+        user_node->friends = NULL;
+        user_node->tweets = NULL;
 
-        u->user[i] = user;
+        user->user[i] = user_node;
 
-        u->count++;
+        user->count++;
     }
 
-    qsort(u->user, u->count, sizeof(User*), compare);
+    qsort(user->user, user->count, sizeof(User*), compare);
 
     fclose(fp);
 }
@@ -83,21 +83,21 @@ int compare(const void *a, const void *b)
 /*
 이진 탐색으로 유저 인덱스 검색
 */
-int find_user_index(UserType *u, int id, int left, int right)
+int find_user_index(UserType *user, int id, int left, int right)
 {
     if (left > right) return -1;
 
     int mid = (left + right) / 2;
-    if (u->user[mid]->id_num == id) return mid;
+    if (user->user[mid]->id_num == id) return mid;
 
-    if (id < u->user[mid]->id_num) find_user_index(u, id, left, mid - 1);
-    else find_user_index(u, id, mid + 1, right);
+    if (id < user->user[mid]->id_num) find_user_index(user, id, left, mid - 1);
+    else find_user_index(user, id, mid + 1, right);
 }
 
 /*
 친구 추가
 */
-void add_friends(UserType *u)
+void add_friends(UserType *user)
 {
     FILE *fp;
     fopen_s(&fp, "friend.txt", "r");
@@ -123,19 +123,16 @@ void add_friends(UserType *u)
 
         if (temp == NULL || friendUser == NULL) return;
 
-        temp = u->user[find_user_index(u, friend_id, 0, u->count - 1)];
+        temp = user->user[find_user_index(user, friend_id, 0, user->count - 1)];
 
-        //friends를 NULL로 만들기 위한 구조체 복사
-        memcpy_s(friendUser, sizeof(friendUser), temp, sizeof(temp));
+        //구조체 복사
+        memcpy_s(friendUser, sizeof(*friendUser), temp, sizeof(*temp));
 
-        //요소 복사
-        strcpy_s(friendUser->name , sizeof(friendUser->name), temp->name);
-        strcpy_s(friendUser->sign_up_date, sizeof(friendUser->sign_up_date), temp->sign_up_date);
         friendUser->tweets = NULL;
         friendUser->friends = NULL;
 
         //유저
-        temp = u->user[find_user_index(u, user_id, 0, u->count - 1)];
+        temp = user->user[find_user_index(user, user_id, 0, user->count - 1)];
         //끝을 찾음
         while (temp->friends != NULL) temp = temp->friends;
 
@@ -153,7 +150,7 @@ void add_friends(UserType *u)
 /*
 트윗 추가
 */
-void add_tweets(UserType *u)
+void add_tweets(UserType *user)
 {
     FILE *fp;
     fopen_s(&fp, "word.txt", "r");
@@ -169,10 +166,10 @@ void add_tweets(UserType *u)
     for (int i = 0; !feof(fp); i++)
     {
         TweetType *tweet = (TweetType*)malloc(sizeof(TweetType));
-        User *user = (User*)malloc(sizeof(User));
+        User *user_node = (User*)malloc(sizeof(User));
         TweetType *temp = (TweetType*)malloc(sizeof(TweetType));
 
-        if (user == NULL || tweet == NULL || temp == NULL) return;
+        if (user_node == NULL || tweet == NULL || temp == NULL) return;
 
         int user_id = 0;
         char date[35];
@@ -186,11 +183,11 @@ void add_tweets(UserType *u)
         fscanf_s(fp, "%[^\n]\n", temp_tweet, sizeof(temp_tweet));
 
         //유저
-        user = u->user[find_user_index(u, user_id, 0, u->count - 1)];
-        temp = user->tweets;
+        user_node = user->user[find_user_index(user, user_id, 0, user->count - 1)];
+        temp = user_node->tweets;
 
         //맨 처음 트윗이면 바로 연결
-        if (temp == NULL) user->tweets = tweet;
+        if (temp == NULL) user_node->tweets = tweet;
         //아니면 끝을 찾음
         else
         {
@@ -204,9 +201,9 @@ void add_tweets(UserType *u)
         tweet->next_tweet = NULL;
 
         //메모리 해제
-        user = NULL;
+        user_node = NULL;
         temp = NULL;
-        free(user);
+        free(user_node);
         free(temp);
     }
 

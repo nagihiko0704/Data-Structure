@@ -13,7 +13,7 @@ typedef struct user //유저 정보
     int id_num;					//고유번호
     char sign_up_date[40];      //가입일
     char name[20];				//닉네임
-    TweetType *tweets;				//트윗
+    TweetType *tweets;          //트윗
     struct user *friends;		//친구
 }User;
 
@@ -23,9 +23,10 @@ typedef struct UserType //유저 배열 구조체
     User *user[MAX_USER];
 }UserType;
 
-void init(UserType *u);
-void init_userType(UserType *u);
-void insert_user(UserType *u);
-void add_friends(UserType *u);
-void add_tweets(UserType *u);
+void init(UserType *user);
+void init_userType(UserType *user);
+void insert_user(UserType *user);
+void add_friends(UserType *user);
+void add_tweets(UserType *user);
 int compare(const void *a, const void *b);
+int find_user_index(UserType *user, int id, int left, int right);
