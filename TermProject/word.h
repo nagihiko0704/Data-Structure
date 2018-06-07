@@ -37,3 +37,7 @@ HeapNode delete_min_heap(Heap *h);
 void find_user(Word *w, UserType *u, char find_word[]);
 int find_word_index(Word *w, char find_word[], int left, int right);
 void count_word(Word *w, char word[]);
+Word *num_sort(Word *w);
+int partition(Word *w, int left, int right);
+void quick_sort(Word *w, int left, int right);
+void swap(Word *w, int left, int mid);
