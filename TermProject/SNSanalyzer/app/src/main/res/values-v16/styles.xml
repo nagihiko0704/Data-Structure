@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="custom_tab" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/font_nanum_square_round_eb</item>
+
+    </style>
+</resources>

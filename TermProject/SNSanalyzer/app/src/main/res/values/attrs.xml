@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="custom_container">
+        <attr name="info" format="string|reference"/>
+        <attr name="container_height" format="integer|reference"/>
+    </declare-styleable>
+</resources>

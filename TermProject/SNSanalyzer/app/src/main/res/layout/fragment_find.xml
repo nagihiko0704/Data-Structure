@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#DAE3F3">
+
+    <TextView
+        android:id="@+id/find_find_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="무엇이든 찾아보세요!"
+        android:textSize="30sp"
+        android:fontFamily="@font/font_nanum_square_round_eb"
+        android:textColor="#000000"
+        android:layout_centerHorizontal="true"/>
+
+
+
+        <RadioGroup
+            android:id="@+id/find_button_container_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/find_find_text"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/find_word_btn"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_gravity="left"
+                android:text="단어 찾기"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textColor="@drawable/bg_find_text_selector"
+                android:fontFamily="@font/font_nanum_square_round_eb"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_find_selector"
+                android:checked="true"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/find_friend_btn"
+                android:layout_width="160dp"
+                android:layout_height="100dp"
+                android:layout_gravity="right"
+                android:text="친구 찾기"
+                android:textSize="25dp"
+                android:gravity="center"
+                android:textColor="@drawable/bg_find_text_selector"
+                android:fontFamily="@font/font_nanum_square_round_eb"
+                android:button="@android:color/transparent"
+                android:background="@drawable/bg_find_selector"/>
+        </RadioGroup>
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/find_button_container_rg"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="#FFFFFF"/>
+
+</RelativeLayout>

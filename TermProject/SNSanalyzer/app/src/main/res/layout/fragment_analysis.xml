@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#DAE3F3"
+    android:padding="10dp">
+
+
+    <!--TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="친구관련"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/font_nanum_square_round_eb"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/bg_round_rec_blue"
+        android:elevation="1dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#F2F2F2">
+
+    </LinearLayout-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/analysis_friend_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/analysis_friend_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="친구 관련"
+                android:textSize="25dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/font_namun_square_round_b"
+                android:background="@drawable/bg_round_rec_blue"/>
+
+            <LinearLayout
+                android:id="@+id/analysis_friend_container_rl"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:paddingTop="35dp"
+                android:paddingLeft="20dp"
+                android:background="@drawable/bg_round_rec_gray">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/analysis_friend_container_title"
+                        android:layout_width="7dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/bg_round_rec_light_blue"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/analysis_friend_container_title"
+                        android:fontFamily="@font/font_namun_square_round_b"
+                        android:text="가장 친구가 많은 유저 TOP 3"
+                        android:textColor="#000000"
+                        android:textSize="18dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_01"
+                                android:text="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+                        <Space
+                            android:layout_height="9dp"/>
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_02"
+                                android:text="2"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+                        <Space
+                            android:layout_height="9dp"/>
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_03"
+                                android:text="3"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+
+                    </TableLayout>
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/analysis_word_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/analysis_friend_rl">
+
+            <TextView
+                android:id="@+id/analysis_word_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="1dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="단어 관련"
+                android:textSize="25dp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/font_namun_square_round_b"
+                android:background="@drawable/bg_round_rec_blue"/>
+
+            <LinearLayout
+                android:id="@+id/analysis_잭ㅇ_container_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:paddingTop="35dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="35dp"
+                android:background="@drawable/bg_round_rec_gray">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/analysis_word_container_title"
+                        android:layout_width="7dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/bg_round_rec_light_blue"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/analysis_word_container_title"
+                        android:text="일정 기간 별 가장 많이 언급된 단어 TOP 3"
+                        android:fontFamily="@font/font_namun_square_round_b"
+                        android:textSize="18dp"
+                        android:textColor="#000000"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="center"
+                    android:text="최근 1년간"
+                    android:textSize="14dp"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/font_namun_square_round_b"
+                    android:background="@drawable/bg_round_rec_blue_02" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_01"
+                                android:text="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+                        <Space
+                            android:layout_height="9dp"/>
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_02"
+                                android:text="2"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+                        <Space
+                            android:layout_height="9dp"/>
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_03"
+                                android:text="3"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+
+                    </TableLayout>
+                </RelativeLayout>
+                
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+                    
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="center"
+                    android:text="최근 1개월간"
+                    android:textSize="12dp"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/font_namun_square_round_b"
+                    android:background="@drawable/bg_round_rec_blue_02" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_01"
+                                android:text="1"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+                        <Space
+                            android:layout_height="9dp"/>
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_02"
+                                android:text="2"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+                        <Space
+                            android:layout_height="9dp"/>
+                        <TableRow>
+                            <TextView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@drawable/bg_cir_blue_03"
+                                android:text="3"
+                                android:textColor="#FFFFFF"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:gravity="center"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="asdf"
+                                android:textColor="#000000"
+                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(123,456 명)"
+                                android:textSize="18dp"
+                                android:textColor="#000000"
+                                android:fontFamily="@font/font_namun_square_round_b"/>
+                        </TableRow>
+
+                    </TableLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+</ScrollView>
