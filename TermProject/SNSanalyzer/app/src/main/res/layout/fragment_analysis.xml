@@ -115,14 +115,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:text="GKill0_0"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(7,862 명)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -144,14 +144,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:text="amaamima"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(6,143 명)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -173,14 +173,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:text="Hello_god"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(4,286 명)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -220,7 +220,7 @@
                 android:background="@drawable/bg_round_rec_blue"/>
 
             <LinearLayout
-                android:id="@+id/analysis_잭ㅇ_container_rl"
+                android:id="@+id/analysis_word_container_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -290,22 +290,24 @@
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"
                                 android:gravity="center"/>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:text="RT"
                                 android:textColor="#000000"
-                                android:textSize="18dp"
-                                android:fontFamily="@font/font_namun_square_round_b"/>
+                                android:textSize="18dp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
-                                android:textSize="18dp"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:text="(6,889 번)"
                                 android:textColor="#000000"
-                                android:fontFamily="@font/font_namun_square_round_b"/>
+                                android:textSize="18dp" />
                         </TableRow>
                         <Space
                             android:layout_height="9dp"/>
@@ -319,19 +321,20 @@
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"
                                 android:gravity="center"/>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:text="내가"
                                 android:textColor="#000000"
-                                android:textSize="18dp"
-                                android:fontFamily="@font/font_namun_square_round_b"/>
+                                android:textSize="18dp" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(3,430 번)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -348,19 +351,20 @@
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"
                                 android:gravity="center"/>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/font_namun_square_round_b"
+                                android:text="bot"
                                 android:textColor="#000000"
-                                android:textSize="18dp"
-                                android:fontFamily="@font/font_namun_square_round_b"/>
+                                android:textSize="18dp" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(2,973 번)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -415,14 +419,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:text="아"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(246 번)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -444,14 +448,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:text="^^"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(233 번)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
@@ -473,14 +477,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginLeft="8dp"
-                                android:text="asdf"
+                                android:text="ㅎㅎ"
                                 android:textColor="#000000"
                                 android:textSize="18dp"
                                 android:fontFamily="@font/font_namun_square_round_b"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="(123,456 명)"
+                                android:text="(244 번)"
                                 android:textSize="18dp"
                                 android:textColor="#000000"
                                 android:fontFamily="@font/font_namun_square_round_b"/>

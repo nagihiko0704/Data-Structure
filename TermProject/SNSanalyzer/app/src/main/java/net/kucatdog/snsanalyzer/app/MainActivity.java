@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 import net.kucatdog.snsanalyzer.R;
 
@@ -45,8 +46,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-
 
 
     }
